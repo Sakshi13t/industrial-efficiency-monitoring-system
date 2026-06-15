@@ -1,0 +1,12 @@
+opencv-python
+ultralytics
+filterpy
+flask
+flask-cors
+flask-socketio
+python-socketio
+numpy
+scipy
+pillow
+lap
+pandas
