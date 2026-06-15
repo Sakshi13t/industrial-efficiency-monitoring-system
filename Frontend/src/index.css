@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+@theme {
+  /* This defines your custom colors so @apply works */
+  --color-primary: #0f172a;
+  --color-secondary: #1e293b;
+  --color-accent: #10b981;
+  
+  /* Helper variable for glass effect */
+  --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* In v4, we use @utility (or just CSS classes) 
+  but @apply still works inside generic CSS blocks 
+*/
+
+/* Base Setup */
+:root {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-primary text-slate-50 font-sans antialiased;
+}
+
+/* Components */
+@layer components {
+  /* Layout Containers */
+  .container {
+    @apply max-w-[1400px] mx-auto p-8;
+  }
+
+  /* Glassmorphism Card */
+  .card {
+    /* Note: We use border-[color] syntax for arbitrary values */
+    @apply bg-secondary/70 backdrop-blur-xl rounded-xl p-6 shadow-lg transition-all duration-200;
+    border: var(--glass-border);
+  }
+  .card:hover {
+    @apply -translate-y-0.5 shadow-xl;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply bg-accent text-white py-3 px-6 rounded-lg font-semibold inline-flex items-center gap-2 transition-all duration-200 mt-2 mb-2.5 cursor-pointer border-none;
+  }
+  .btn:hover {
+    @apply bg-emerald-700 -translate-y-[1px];
+  }
+  .btn-secondary {
+    @apply bg-slate-700 text-slate-100;
+  }
+  .btn-danger {
+    @apply bg-red-500 hover:bg-red-600;
+  }
+
+  /* Inputs */
+  .input {
+    @apply bg-slate-700 border border-transparent py-3 px-8 rounded-lg text-white w-full transition-all mb-3.5 focus:border-accent focus:outline-none;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    @apply w-[260px] bg-secondary border-r border-white/10 flex flex-col p-6 h-screen fixed left-0 top-0;
+  }
+  .sidebar-link {
+    @apply flex items-center gap-3 py-3.5 px-4 text-slate-400 rounded-lg transition-all hover:bg-accent/10 hover:text-accent no-underline;
+  }
+  .sidebar-link.active {
+    @apply bg-accent/10 text-accent;
+  }
+  
+  /* Main Content Area */
+  .main-content {
+    @apply ml-[260px] p-8 min-h-screen;
+  }
+
+  /* Badges */
+  .badge {
+    @apply px-3 py-1 rounded-full text-sm font-medium;
+  }
+  .badge-success {
+    @apply bg-emerald-500/20 text-emerald-400;
+  }
+  
+  /* Typography */
+  .header-title {
+    @apply text-3xl font-extrabold mb-4;
+  }
+  .stat-value {
+    @apply text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400;
+  }
+  .stat-label {
+    @apply text-slate-400 text-sm uppercase tracking-wider;
+  }
+  
+  /* Utility Overrides */
+  .flex { display: flex; }
+  .flex-col { flex-direction: column; }
+  .items-center { align-items: center; }
+  .justify-between { justify-content: space-between; }
+}
